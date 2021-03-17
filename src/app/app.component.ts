@@ -10,6 +10,7 @@ export class AppComponent  {
   name = 'Angular';
 
   constructor(private zipCodesService: ZipCodesService) {
-    this.zipCodesService.resetZipCodes();
+    // this.zipCodesService.resetZipCodes();
+    this.zipCodesService.loadExistingZipCodesFromStorage();
   }
 }

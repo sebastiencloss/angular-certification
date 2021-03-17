@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject} from "rxjs";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,31 @@ export class ZipCodesService {
   constructor() {
   }
 
+  /**
+   * Get the existing data from Storage
+   * @private
+   */
+  private getExistingZipCodesFromStorage(): string[] {
+    let existingZipCodes: string[] = [];
+    if (window.localStorage) {
+      const rawData: string = window.localStorage.getItem(this.localStorageKey);
+      if (rawData) {
+        existingZipCodes = JSON.parse(rawData);
+      }
+    } else {
+      console.error("localstorage not supported");
+    }
+    return existingZipCodes;
+  }
+
+
+  /**
+   * Load existing codes from storage and trigger the observable
+   */
+  public loadExistingZipCodesFromStorage(): void {
+    const codes = this.getExistingZipCodesFromStorage();
+    ZipCodesService.zipCodesSubject.next(codes);
+  }
 
   /**
    * Add a zipcode into the array of zips in localStorage
@@ -28,11 +53,7 @@ export class ZipCodesService {
    */
   public addZipToLocalStorage(zipCode: string): void {
     if (window.localStorage) {
-      let existingZipCodes: string[] = [];
-      const rawData: string = window.localStorage.getItem(this.localStorageKey);
-      if (rawData) {
-        existingZipCodes = JSON.parse(rawData);
-      }
+      let existingZipCodes = this.getExistingZipCodesFromStorage();
       existingZipCodes.push(zipCode);
       ZipCodesService.zipCodesSubject.next(existingZipCodes);
       window.localStorage.setItem(this.localStorageKey, JSON.stringify(existingZipCodes));
@@ -57,15 +78,12 @@ export class ZipCodesService {
    */
   public removeZipCode(zipToRemove: string): void {
     if (window.localStorage) {
-      let existingZipCodes: string[] = [];
-      const rawData: string = window.localStorage.getItem(this.localStorageKey);
-      if (rawData) {
-        existingZipCodes = JSON.parse(rawData);
-        const indexToRemove = existingZipCodes.indexOf(zipToRemove);
-        if (indexToRemove > -1) {
-          existingZipCodes.splice(indexToRemove, 1);
-        }
+      let existingZipCodes = this.getExistingZipCodesFromStorage();
+      const indexToRemove = existingZipCodes.indexOf(zipToRemove);
+      if (indexToRemove > -1) {
+        existingZipCodes.splice(indexToRemove, 1);
       }
+
       ZipCodesService.zipCodesSubject.next(existingZipCodes);
       window.localStorage.setItem(this.localStorageKey, JSON.stringify(existingZipCodes));
     }
