@@ -4,10 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HelloComponent } from './hello.component';
+import { ZipFormComponent } from './components/zip-form/zip-form.component';
+import { ZipCodesService } from "src/app/services/zip-codes/zip-codes.service";
+import { WeatherListComponent } from './weather-list/weather-list.component';
 
 @NgModule({
-  imports:      [ BrowserModule, FormsModule ],
-  declarations: [ AppComponent, HelloComponent ],
-  bootstrap:    [ AppComponent ]
+  imports: [BrowserModule, FormsModule],
+  declarations: [AppComponent,
+    HelloComponent,
+    ZipFormComponent,
+    WeatherListComponent],
+  bootstrap: [AppComponent],
+  providers: [ZipCodesService]
 })
-export class AppModule { }
+export class AppModule {
+}
