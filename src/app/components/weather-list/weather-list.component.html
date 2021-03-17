@@ -1,1 +1,4 @@
-<p>weather-list works!</p>
+<div *ngIf="activeZipCodes && activeZipCodes.length > 0">
+    <app-weather-item *ngFor="let zip of activeZipCodes" [zipCode]="zip"
+                      (deleted)="deleteZipCode(zip)"></app-weather-item>
+</div>
