@@ -13,7 +13,7 @@
         </div>
         <div>
             <span class="close" (click)="deleteItem()">×</span>
-            <!-- not sure if we take the weather[0].main -->
+            <!-- not sure if we take the weather[0].main / main could be a ENUM, for the images -->
             <img *ngIf="weatherData.weather[0].main == 'Clear'" src="assets/images/sun.png" alt="sun">
             <img *ngIf="weatherData.weather[0].main == 'Clouds'" src="assets/images/clouds.png" alt="clouds">
             <img *ngIf="weatherData.weather[0].main == 'Rain'" src="assets/images/rain.png" alt="rain">

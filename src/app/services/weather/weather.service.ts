@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { WeatherModel } from "src/app/models/weather.model";
 import { map } from "rxjs/operators";
+import { WeatherForecastModel } from "src/app/models/weather-forecast.model";
 
 @Injectable({
   providedIn: 'root'
@@ -33,12 +34,12 @@ export class WeatherService {
    * Call the api to get the weather-forecast.
    * @param zipCode
    */
-  public getWeatherForecastInfo(zipCode: string): Observable<any> {
+  public getWeatherForecastInfo(zipCode: string): Observable<WeatherForecastModel> {
     if (!zipCode) {
       return;
     }
 
     const urlToCall = this.apiUrlForecast.replace("{zipCode}", zipCode);
-    return this.httpClient.get(urlToCall);
+    return this.httpClient.get(urlToCall).pipe(map((result)=>{return result as WeatherForecastModel}));
   }
 }

@@ -4,19 +4,23 @@
             <h3 class="panel-title">5-day forecast for {{weatherData.city.name}}</h3>
         </div>
         <ng-container *ngIf="weatherData.list">
-        <ul class="list-group">
-            <li class="list-group-item" *ngFor="let dayData of weatherData.list">
-                {{(dayData.dt * 1000) | date:'EEEE'}}: {{dayData['weather'][0]['main']}}
-                - Min: {{dayData['temp']['min']}}
-                - Max: {{dayData['temp']['max']}}
-                <!-- not sure if we take the weather[0].main -->
-                <img class="icon" *ngIf="dayData['weather'][0].main == 'Clear'" src="assets/images/sun.png" alt="sun">
-                <img class="icon" *ngIf="dayData['weather'][0].main == 'Clouds'" src="assets/images/clouds.png" alt="clouds">
-                <img class="icon" *ngIf="dayData['weather'][0].main == 'Rain'" src="assets/images/rain.png" alt="rain">
-                <img class="icon" *ngIf="dayData['weather'][0].main == 'Snow'" src="assets/images/snow.png" alt="snow">
-            </li>
-        </ul>
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let dayData of weatherData.list">
+                    {{(dayData.dt * 1000) | date:'EEEE'}}: {{dayData['weather'][0]['main']}}
+                    - Min: {{dayData['temp']['min']}}
+                    - Max: {{dayData['temp']['max']}}
+                    <!-- not sure if we take the weather[0].main / main could be a ENUM, for the images-->
+                    <img class="icon" *ngIf="dayData['weather'][0].main == 'Clear'" src="assets/images/sun.png"
+                         alt="sun">
+                    <img class="icon" *ngIf="dayData['weather'][0].main == 'Clouds'" src="assets/images/clouds.png"
+                         alt="clouds">
+                    <img class="icon" *ngIf="dayData['weather'][0].main == 'Rain'" src="assets/images/rain.png"
+                         alt="rain">
+                    <img class="icon" *ngIf="dayData['weather'][0].main == 'Snow'" src="assets/images/snow.png"
+                         alt="snow">
+                </li>
+            </ul>
         </ng-container>
     </div>
-    <button class="btn btn-success" tabindex="0" id="mainPageBtn" [routerLink]="'/'">Back to main page</button>
+    <button class="btn btn-success" tabindex="0" id="mainPageBtn" (click)="goBack()">Back to main page</button>
 </div>

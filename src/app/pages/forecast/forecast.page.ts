@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { WeatherService } from "src/app/services/weather/weather.service";
+import { WeatherForecastModel } from "src/app/models/weather-forecast.model";
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-forecast',
@@ -9,10 +11,11 @@ import { WeatherService } from "src/app/services/weather/weather.service";
 })
 export class ForecastPage implements OnInit {
 
-  public weatherData: any = null;
+  public weatherData: WeatherForecastModel = null;
 
   constructor(private route: ActivatedRoute,
-              private weatherService: WeatherService) {
+              private weatherService: WeatherService,
+              private location: Location) {
   }
 
   ngOnInit(): void {
@@ -26,13 +29,19 @@ export class ForecastPage implements OnInit {
   }
 
   /**
+   * Go to previous page... angular way
+   */
+  public goBack(): void {
+    this.location.back();
+  }
+
+  /**
    * Get the weather forecast
-   * todo: dataModell
    * @param zipCode
    * @private
    */
   private getWeatherForecast(zipCode: string): void {
-    this.weatherService.getWeatherForecastInfo(zipCode).subscribe((weatherData: any) => {
+    this.weatherService.getWeatherForecastInfo(zipCode).subscribe((weatherData: WeatherForecastModel) => {
       this.weatherData = weatherData;
     }, (error) => {
       console.error("error by getting weather-forecast for zipCode " + zipCode, error);
