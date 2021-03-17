@@ -1,23 +1,26 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
     path: "",
+    pathMatch: 'full',
     loadChildren: () => import("./pages/home/home.page.module").then(m => m.HomePageModule),
   },
   {
     path: "forecast",
     loadChildren: () => import("./pages/forecast/forecast.page.module").then(m => m.ForecastPageModule),
   },
+  // todo: works only with routerLink. not with [href], not by refresh or just url... ????
   {
-    path: "forecast/:id",
+    path: "forecast/:zipCode",
     loadChildren: () => import("./pages/forecast/forecast.page.module").then(m => m.ForecastPageModule),
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

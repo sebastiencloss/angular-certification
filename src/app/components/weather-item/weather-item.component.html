@@ -9,9 +9,7 @@
                 - Max {{weatherData.main.temp_max}}
                 - Min {{weatherData.main.temp_min}}
             </p>
-            <p>
-                <a [href]="'/forecast/' + zipCode">Show 5-day forecast for {{weatherData.name}}</a>
-            </p>
+            <p><a [routerLink]="['/forecast',zipCode]">Show 5-day forecast for {{weatherData.name}}</a></p>
         </div>
         <div>
             <span class="close" (click)="deleteItem()">×</span>

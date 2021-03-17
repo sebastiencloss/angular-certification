@@ -4,6 +4,7 @@ import { WeatherItemComponent } from "src/app/components/weather-item/weather-it
 import { WeatherListComponent } from "src/app/components/weather-list/weather-list.component";
 import { ZipFormComponent } from "src/app/components/zip-form/zip-form.component";
 import { FormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FormsModule } from "@angular/forms";
   imports: [
     FormsModule,
     CommonModule,
+    RouterModule,
   ]
 })
 export class CommonComponentsModule {
