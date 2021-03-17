@@ -11,11 +11,6 @@ export const routes: Routes = [
     path: "forecast",
     loadChildren: () => import("./pages/forecast/forecast.page.module").then(m => m.ForecastPageModule),
   },
-  // todo: works only with routerLink. not with [href], not by refresh or just url... ????
-  {
-    path: "forecast/:zipCode",
-    loadChildren: () => import("./pages/forecast/forecast.page.module").then(m => m.ForecastPageModule),
-  },
 ];
 
 @NgModule({

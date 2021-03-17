@@ -6,6 +6,12 @@ import { CommonModule } from "@angular/common";
 const routes: Routes = [
   {
     path: "",
+    pathMatch: 'full',
+    component: ForecastPage
+  },
+  // todo: param works only with routerLink. not with [href], not by refresh or just url... ????
+  {
+    path: ":zipCode",
     component: ForecastPage
   }
 ];
