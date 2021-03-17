@@ -1,11 +1,14 @@
 <div class="well">
     <h2>Enter a zipcode:</h2>
-    <label for="zipCode"></label>
-    <input class="form-control" [(ngModel)]="newZipLocation" name="zipCode" placeholder="Zipcode"
-           type="text"
-           id="zipCode">
-    <br>
-    <button class="btn btn-primary" id="addLocationBtn" (click)="addZipLocation()" [disabled]="!newZipLocation">Add
-        location
-    </button>
+    <form (ngSubmit)="addZipLocation()">
+        <label for="zipCode"></label>
+        <input class="form-control" [(ngModel)]="newZipLocation" name="zipCode" placeholder="Zipcode"
+               type="text"
+               id="zipCode">
+        <br>
+        <button class="btn btn-primary" id="addLocationBtn" (click)="addZipLocation()" [disabled]="!newZipLocation"
+                type="submit">Add
+            location
+        </button>
+    </form>
 </div>

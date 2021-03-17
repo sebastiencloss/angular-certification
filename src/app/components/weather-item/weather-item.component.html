@@ -1,25 +1,26 @@
 <div class="well flex" *ngIf="zipCode">
-    <ng-container *ngIf="weatherData">
-        <div>
-            <h3>{{weatherData.name}} ({{zipCode}})</h3>
-            <h4>Current conditions: {{weatherData.weather[0].main}}</h4>
-            <h4>Temperatures today:</h4>
-            <p>
-                Current {{weatherData.main.temp}}
-                - Max {{weatherData.main.temp_max}}
-                - Min {{weatherData.main.temp_min}}
-            </p>
-            <p><a [routerLink]="['/forecast',zipCode]">Show 5-day forecast for {{weatherData.name}}</a></p>
-        </div>
-        <div>
-            <span class="close" (click)="deleteItem()">×</span>
+    <div *ngIf="weatherData">
+        <h3>{{weatherData.name}} ({{zipCode}})</h3>
+        <h4>Current conditions: {{weatherData.weather[0].main}}</h4>
+        <h4>Temperatures today:</h4>
+        <p>
+            Current {{weatherData.main.temp}}
+            - Max {{weatherData.main.temp_max}}
+            - Min {{weatherData.main.temp_min}}
+        </p>
+        <p><a [routerLink]="['/forecast',zipCode]">Show 5-day forecast for {{weatherData.name}}</a></p>
+    </div>
+    <div>
+        <!-- we display the X, even if no weather data or bad zipcode, so we an remove it -->
+        <span class="close" (click)="deleteItem()">×</span>
+        <ng-container *ngIf="weatherData">
             <!-- not sure if we take the weather[0].main / main could be a ENUM, for the images -->
             <img *ngIf="weatherData.weather[0].main == 'Clear'" src="assets/images/sun.png" alt="sun">
             <img *ngIf="weatherData.weather[0].main == 'Clouds'" src="assets/images/clouds.png" alt="clouds">
             <img *ngIf="weatherData.weather[0].main == 'Rain'" src="assets/images/rain.png" alt="rain">
             <img *ngIf="weatherData.weather[0].main == 'Snow'" src="assets/images/snow.png" alt="snow">
-        </div>
-    </ng-container>
+        </ng-container>
+    </div>
 
     <!-- we could have a loading icon - if weatherData not yet loaded -->
 </div>
