@@ -7,7 +7,11 @@ export const routes: Routes = [
     loadChildren: () => import("./pages/home/home.page.module").then(m => m.HomePageModule),
   },
   {
-    path: "forecast/:zipCode",
+    path: "forecast",
+    loadChildren: () => import("./pages/forecast/forecast.page.module").then(m => m.ForecastPageModule),
+  },
+  {
+    path: "forecast/:id",
     loadChildren: () => import("./pages/forecast/forecast.page.module").then(m => m.ForecastPageModule),
   },
 ];
