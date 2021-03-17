@@ -16,6 +16,9 @@ export class ZipFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Add a zip from form
+   */
   public addZipLocation(): void {
     if (this.newZipLocation) {
       this.zipCodesService.addZipToLocalStorage(this.newZipLocation);

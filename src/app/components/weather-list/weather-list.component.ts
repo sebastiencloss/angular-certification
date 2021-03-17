@@ -37,5 +37,4 @@ export class WeatherListComponent implements OnInit, OnDestroy {
   public deleteZipCode(zip: string): void {
     this.zipCodesService.removeZipCode(zip);
   }
-
 }
